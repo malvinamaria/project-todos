@@ -7,8 +7,28 @@ import './AddNewTask.css';
 import swal from 'sweetalert';
 import plus from '../img/plus.png';
 
+function getOrdinalSuffix(day) {
+  if (day >= 11 && day <= 13) {
+    return 'th';
+  }
+  switch (day % 10) {
+    case 1:
+      return 'st';
+    case 2:
+      return 'nd';
+    case 3:
+      return 'rd';
+    default:
+      return 'th';
+  }
+}
 // Create a functional component named 'AddNewTask'
 export const AddNewTask = () => {
+  const date = new Date();
+  const month = date.toLocaleString('default', { month: 'long' });
+  const day = date.getDate();
+  const ordinal = getOrdinalSuffix(day);
+  const year = date.getFullYear();
   // Use the useDispatch hook to get access to the Redux dispatch function
   const dispatch = useDispatch();
   // Use the useState hook to declare a new state variable 'newTaskValue'
@@ -36,23 +56,23 @@ export const AddNewTask = () => {
   };
   // Render a section with a class name of 'add-new-task'
   return (
-    <section className="add-new-task">
-      <form onSubmit={onFormSubmit}>
-        <label htmlFor="addTaskInput">
-          <input
-            className="add-task-input"
-            type="text"
-            value={newTaskValue}
-            onChange={(event) => setNewTaskValue(event.target.value)}
-            id="addTaskInput"
-            placeholder="Add new task here"
-          />
-        </label>
-        <button className="add-task-btn" type="submit">
-          Task
-          <img src={plus} alt="plus" />
-        </button>
-      </form>
-    </section>
+    <form className="form-container" onSubmit={onFormSubmit}>
+      <h3>What do you need to do today?</h3>
+      <h4>{`${month} ${day}${ordinal}, ${year}`}</h4>{' '}
+      <label htmlFor="addTaskInput">
+        <input
+          className="add-task-input"
+          type="text"
+          value={newTaskValue}
+          onChange={(event) => setNewTaskValue(event.target.value)}
+          id="addTaskInput"
+          placeholder="Add new task here"
+        />
+      </label>
+      <button className="add-task-btn" type="submit">
+        Task
+        <img src={plus} alt="plus" />
+      </button>
+    </form>
   );
 };

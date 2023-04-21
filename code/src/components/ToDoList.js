@@ -6,9 +6,13 @@ import './ToDoList.css';
 import delete1 from '../img/delete1.png';
 
 export const ToDoList = () => {
+  const dispatch = useDispatch();
   // useSelector is a hook that allows us to access the store
   const allTasks = useSelector((store) => store.tasks);
-  const dispatch = useDispatch();
+  const checkboxToggle = (id) => {
+    dispatch(tasks.actions.toggleComplete(id));
+  };
+
   return (
     <section className="task-list">
       <div className="grow">
@@ -16,7 +20,13 @@ export const ToDoList = () => {
         {allTasks.map((task) => (
           <div className="task-container">
             <div className="task">
-              <input key={task.id} task={task} type="checkbox" />
+              <input
+                key={task.id}
+                task={task}
+                type="checkbox"
+                value={task.isComplete}
+                onChange={() => checkboxToggle(task.id)}
+              />
               <p>{task.text}</p>
               <p>{task.emoji}</p>
               <button
@@ -33,10 +43,3 @@ export const ToDoList = () => {
     </section>
   );
 };
-// print path: code/src/components/ToDoList.js
-// print path to delete.png: code/src/img/delete.png
-// how to get path to the delete.png file?
-// how to access delete.png from here?
-// how to get the path to the delete.png file?
-// how to get the path to the delete.png file?  // print path: code/src/components/ToDoList.js
-// print path to delete.png: code/src/img/delete.png

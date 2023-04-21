@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-family: 'Sora', sans-serif;
+  background-color: rgb(54, 50, 64);
 }
 
 code {
@@ -13,5 +14,19 @@ button {
   margin: 0;
   padding: 0;
   cursor: pointer;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Sora', sans-serif;
+  border-radius: 50px;
 }
+
+/* add-task-btn {
+  padding: 0.6em 1.2em;
+  font-size: 16px;
+  background-color: rgb(177, 162, 255);
+  border: none;
+  border-radius: 50px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  font-size: 1rem;
+  padding: 0.7rem 0.9rem;
+} */
